@@ -1,46 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import InputWrapper from '../InputWrapper';
+import CheckboxWrapper from '../CheckboxWrapper';
+
+import { ALARM, ALARM_MODE, ALARM_KIND, CHECKBOX_TEXT, BUTTON } from '../../constants/inputText';
+
 export default function RegisterAlarm() {
+  const [inputValue, setInputValue] = useState({
+    title: "",
+    date: "",
+    time: "",
+    mode: "",
+    kind: "",
+    text: "",
+  });
+
+  const handleChange = ev => {
+    const { name, value } = ev.target;
+    setInputValue({
+      ...inputValue, [name]: value
+    });
+  }
+
   return (
     <Container>
-      <Wrapper>
-        <span>알람 이름을 입력해주세요요</span>
-        <input type="title" name="title" />
-      </Wrapper>
-      <Wrapper>
-        <span>날짜를 선택하세요</span>
-        <input type="date" name="date" />
-      </Wrapper>
-      <Wrapper>
-        <span>시간을 선택하세요</span>
-        <input type="time" name="time" />
-      </Wrapper>
-      <CheckboxWrapper>
-        <span>시간을 선택하세요</span>
-        <div>
-          <input type="checkbox" id="basic-mode" name="basic-mode" />
-          <label htmlFor="basic-mode">일반 모드</label>
-          <input type="checkbox" id="vibration-mode" name="vibration-mode" />
-          <label htmlFor="vibration-mode">진동 모드</label>
-          <input type="checkbox" id="night-mode" name="night-mode" />
-          <label htmlFor="night-mode">야간 모드</label>
-        </div>
-      </CheckboxWrapper>
-      <CheckboxWrapper>
-        <span>알람종류를 선택하세요</span>
-        <div>
-          <input type="checkbox" id="basic-alarm" name="basic-alarm" />
-          <label htmlFor="basic-alarm">일반 알람</label>
-          <input type="checkbox" id="emergency-alarm" name="emergency-alarm" />
-          <label htmlFor="emergency-alarm">긴급 알람</label>
-        </div>
-      </CheckboxWrapper>
-      <Wrapper>
-        <span>알람 메시지를 입력해주세요</span>
-        <input type="text" name="text" />
-      </Wrapper>
-      <button className="create-button" type="submit">Create Alarm</button>
+      <InputWrapper inputInfo={ALARM.TITLE} sendInputValue={handleChange} />
+      <InputWrapper inputInfo={ALARM.DATE} sendInputValue={handleChange} />
+      <InputWrapper inputInfo={ALARM.TIME} sendInputValue={handleChange} />
+
+      <CheckboxWrapper checkboxType={CHECKBOX_TEXT.TIME} alarmStyle={ALARM_MODE} />
+      <CheckboxWrapper checkboxType={CHECKBOX_TEXT.MODE} alarmStyle={ALARM_KIND} />
+      <InputWrapper inputInfo={ALARM.MESSAGE} sendInputValue={handleChange} />
+
+      <button className="create-button" type="submit">{BUTTON.CREATE}</button>
     </Container>
   )
 }
@@ -66,26 +59,5 @@ const Container = styled.div`
     padding: 10px;
     border: 0;
     border-radius: 20px;
-  }
-`;
-
-const Wrapper = styled.div`
-  padding: 10px;
-
-  span {
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  input {
-    width: 200px;
-  }
-`;
-
-const CheckboxWrapper = styled.div`
-  padding: 10px;
-
-  div {
-    margin-bottom: 10px;
   }
 `;

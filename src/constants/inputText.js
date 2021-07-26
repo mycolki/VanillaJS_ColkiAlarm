@@ -1,0 +1,26 @@
+export const ALARM = {
+  TITLE: { type: "text", name:'title', text: '알람 이름을 입력해주세요'},
+  DATE: { type: "date", name: 'date', text: '날짜를 선택해주세요'},
+  TIME: { type: "time", name: 'time', text: '시간을 선택해주세요'},
+  MESSAGE: { type: "text", name: 'message', text: '알람 메시지를 입력해주세요'},
+};
+
+export const ALARM_MODE = {
+  BASIC: { name:'basic-mode', text: '일반 모드'},
+  VIBRATION: { name: 'vibration-mode', text: '진동 모드'},
+  NIGHT: {name: 'night-mode', text: '야간 모드'},
+};
+
+export const ALARM_KIND = {
+  BASIC: { name: 'basic-alarm', text: '일반 알람'},
+  EMERGENCY: { name: 'emergency-alarm', text: '긴급 알람'},
+};
+
+export const CHECKBOX_TEXT = {
+  TIME: '알람 모드를 선택하세요',
+  MODE: '알람 종류를 선택하세요'
+};
+
+export const BUTTON = {
+  CREATE: 'Create Alarm!',
+};
