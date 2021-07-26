@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Header from '../components/Header';
 import RegisterAlarm from '../components/RegisterAlarm';
-import AlarmsViewer from '../components/AlarmsViewer';
+import AlarmsViewer from '../components/AlarmList';
 
 export default function App() {
   return (

@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import Alarm from '../Alarm';
 
 export default function AlarmsViewer() {
   return (
     <Container>
-      알람리스트
+      <ul>
+        <Alarm />
+      </ul>
     </Container>
   )
 }

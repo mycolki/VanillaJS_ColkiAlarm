@@ -20,26 +20,27 @@ export default function RegisterAlarm() {
         <span>시간을 선택하세요</span>
         <div>
           <input type="checkbox" id="basic-mode" name="basic-mode" />
-          <label for="basic-mode">일반 모드</label>
+          <label htmlFor="basic-mode">일반 모드</label>
           <input type="checkbox" id="vibration-mode" name="vibration-mode" />
-          <label for="vibration-mode">진동 모드</label>
+          <label htmlFor="vibration-mode">진동 모드</label>
           <input type="checkbox" id="night-mode" name="night-mode" />
-          <label for="night-mode">야간 모드</label>
+          <label htmlFor="night-mode">야간 모드</label>
         </div>
       </CheckboxWrapper>
       <CheckboxWrapper>
         <span>알람종류를 선택하세요</span>
         <div>
           <input type="checkbox" id="basic-alarm" name="basic-alarm" />
-          <label for="basic-alarm">일반 알람</label>
+          <label htmlFor="basic-alarm">일반 알람</label>
           <input type="checkbox" id="emergency-alarm" name="emergency-alarm" />
-          <label for="emergency-alarm">긴급 알람</label>
+          <label htmlFor="emergency-alarm">긴급 알람</label>
         </div>
       </CheckboxWrapper>
       <Wrapper>
         <span>알람 메시지를 입력해주세요</span>
         <input type="text" name="text" />
       </Wrapper>
+      <button className="create-button" type="submit">Create Alarm</button>
     </Container>
   )
 }
@@ -59,14 +60,21 @@ const Container = styled.div`
     padding: 10px;
     text-align: center;
   }
+
+  .create-button {
+    margin-top: 10px;
+    padding: 10px;
+    border: 0;
+    border-radius: 20px;
+  }
 `;
 
 const Wrapper = styled.div`
-  margin-top: 30px;
+  padding: 10px;
 
   span {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   input {
@@ -75,9 +83,9 @@ const Wrapper = styled.div`
 `;
 
 const CheckboxWrapper = styled.div`
-  margin-top: 30px;
+  padding: 10px;
 
   div {
-    margin-top: 10px;
+    margin-bottom: 10px;
   }
 `;
