@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import CheckboxInput from '../CheckboxInput';
+import CheckboxInput from '../RadioInput';
 
-export default function CheckboxWrapper({ checkboxType, alarmStyle}) {
+export default function CheckboxWrapper({ checkboxType, alarmStyle }) {
   return (
     <Wrapper>
       <span>{checkboxType}</span>

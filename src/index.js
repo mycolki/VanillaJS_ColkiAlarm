@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './app/App';
 
 import './index.css';
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   body {

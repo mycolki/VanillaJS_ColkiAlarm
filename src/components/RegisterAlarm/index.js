@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import InputWrapper from '../InputWrapper';
-import CheckboxWrapper from '../CheckboxWrapper';
+import RadioInputWrapper from '../RadioInputWrapper';
 
-import { ALARM, ALARM_MODE, ALARM_KIND, CHECKBOX_TEXT, BUTTON } from '../../constants/inputText';
+import { ALARM, ALARM_MODE, ALARM_KIND, RADIO_TEXT, BUTTON } from '../../constants/inputText';
 
 export default function RegisterAlarm() {
   const [inputValue, setInputValue] = useState({
@@ -21,19 +21,42 @@ export default function RegisterAlarm() {
     setInputValue({
       ...inputValue, [name]: value
     });
-  }
+  };
 
   return (
     <Container>
-      <InputWrapper inputInfo={ALARM.TITLE} sendInputValue={handleChange} />
-      <InputWrapper inputInfo={ALARM.DATE} sendInputValue={handleChange} />
-      <InputWrapper inputInfo={ALARM.TIME} sendInputValue={handleChange} />
-
-      <CheckboxWrapper checkboxType={CHECKBOX_TEXT.TIME} alarmStyle={ALARM_MODE} />
-      <CheckboxWrapper checkboxType={CHECKBOX_TEXT.MODE} alarmStyle={ALARM_KIND} />
-      <InputWrapper inputInfo={ALARM.MESSAGE} sendInputValue={handleChange} />
-
-      <button className="create-button" type="submit">{BUTTON.CREATE}</button>
+      <InputWrapper
+        inputInfo={ALARM.TITLE}
+        sendInputValue={handleChange}
+      />
+      <InputWrapper
+        inputInfo={ALARM.DATE}
+        sendInputValue={handleChange}
+      />
+      <InputWrapper
+        inputInfo={ALARM.TIME}
+        sendInputValue={handleChange}
+      />
+      <RadioInputWrapper
+        radioTitle={RADIO_TEXT.TIME}
+        alarmStyle={ALARM_MODE}
+        sendInputValue={handleChange}
+      />
+      <RadioInputWrapper
+        radioTitle={RADIO_TEXT.MODE}
+        alarmStyle={ALARM_KIND}
+        sendInputValue={handleChange}
+      />
+      <InputWrapper
+        inputInfo={ALARM.MESSAGE}
+        sendInputValue={handleChange}
+      />
+      <Button
+        className="create-button"
+        type="submit"
+      >
+        {BUTTON.CREATE}
+      </Button>
     </Container>
   )
 }
@@ -53,11 +76,11 @@ const Container = styled.div`
     padding: 10px;
     text-align: center;
   }
+`;
 
-  .create-button {
-    margin-top: 10px;
-    padding: 10px;
-    border: 0;
-    border-radius: 20px;
-  }
+const Button = styled.button`
+  margin-top: 10px;
+  padding: 10px;
+  border: 0;
+  border-radius: 20px;
 `;

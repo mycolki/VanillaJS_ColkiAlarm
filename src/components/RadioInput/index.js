@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function CheckboxInput({ item: { name, text } }) {
+export default function RadioInput({ item: { type, name, text }, sendInputValue }) {
   return (
     <Wrapper>
       <input
-        type="checkbox"
+        type="radio"
         id={name}
-        name={name}
+        name={type}
+        value={name}
+        onChange={sendInputValue}
       />
       <label htmlFor={name}>
         {text}
