@@ -1,7 +1,33 @@
-function App() {
+import React from "react";
+import styled from 'styled-components';
+
+import Header from '../components/Header';
+import RegisterAlarm from '../components/RegisterAlarm';
+import AlarmsViewer from '../components/AlarmsViewer';
+
+export default function App() {
   return (
-    <h1>HELLO</h1>
+    <Container>
+      <Header />
+      <Section>
+        <RegisterAlarm />
+        <AlarmsViewer />
+      </Section>
+    </Container>
   );
 }
 
-export default App;
+const Container = styled.div`
+  background-color: lightGray;
+`;
+
+const Section = styled.div`
+  display: flex;
+  flex: 1 1 50%;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 600px;
+  margin: auto;
+  background-color: teal;
+`;
