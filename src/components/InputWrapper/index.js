@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function InputWrapper({ inputInfo: { type, name, text }, sendInputValue }) {
-
+export default function InputWrapper({ inputInfo: { type, name, text }, value, sendInputValue }) {
   return (
     <Wrapper>
       <span>{text}</span>
       <input
         type={type}
         name={name}
+        value={value}
         onChange={sendInputValue}
       />
     </Wrapper>

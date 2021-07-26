@@ -16,9 +16,9 @@ export const ALARM_KIND = {
   EMERGENCY: { type: 'kind', name: 'emergency-alarm', text: '긴급 알람'},
 };
 
-export const RADIO_TEXT = {
-  TIME: '알람 모드를 선택하세요',
-  MODE: '알람 종류를 선택하세요'
+export const RADIO_TITLE = {
+  MODE: '알람 모드를 선택하세요',
+  KIND: '알람 종류를 선택하세요'
 };
 
 export const BUTTON = {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import RadioInput from '../RadioInput';
 
-export default function RadioInputWrapper({ radioTitle, alarmStyle, sendInputValue }) {
+export default function RadioInputWrapper({ radioTitle, alarmStyle, value, sendInputValue }) {
   return (
     <Wrapper>
       <span>{radioTitle}</span>
@@ -12,6 +12,7 @@ export default function RadioInputWrapper({ radioTitle, alarmStyle, sendInputVal
           <RadioInput
             key={item.name}
             item={item}
+            value={value}
             sendInputValue={sendInputValue}
           />
         ))}

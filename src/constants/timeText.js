@@ -1,1 +1,2 @@
-export const TIME_FORMAT = 'YYYY/ MM/DD hh:mm:ss A';
+export const TIME_FORMAT = 'MM.DD ddd LTS';
+export const ALARM_TIME = 'MM/DD';
