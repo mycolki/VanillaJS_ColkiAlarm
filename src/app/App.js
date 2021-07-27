@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import moment from 'moment';
 
 import Header from '../components/Header';
 import RegisterAlarm from '../components/RegisterAlarm';
@@ -9,20 +8,19 @@ import AlarmsViewer from '../components/AlarmList';
 import ModalWrapper from '../components/ModalWrapper';
 import Message from '../components/Message';
 
-import { removeAlarm, initializeRingedId } from '../features/alarmData/alarmDataSlice';
-import { CLOCK_FORMAT } from '../constants/timeText';
+import { setClock, removeAlarm, initializeRingedId } from '../features/alarmData/alarmDataSlice';
 
 export default function App() {
-  const [clock, setClock] = useState(moment().format(CLOCK_FORMAT));
+  const dispatch = useDispatch();
+  const { clock } = useSelector(state => state.alarmData)
+  const { isTimeToAlarm, id } = useSelector(state => state.alarmData);
 
   useEffect(() => {
-    const clockId = setInterval(() => setClock(moment().format(CLOCK_FORMAT)), 1000);
+    const clockId = setInterval(() => dispatch(setClock()), 1000);
 
     return () => clearInterval(clockId);
-  }, []);
+  }, [dispatch]);
 
-  const { isTimeToAlarm, id } = useSelector(state => state.alarmData);
-  const dispatch = useDispatch();
   const closeMessage = () => {
     dispatch(initializeRingedId());
     dispatch(removeAlarm(id))

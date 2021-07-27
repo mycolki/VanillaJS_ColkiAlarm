@@ -1,7 +1,10 @@
+import moment from 'moment';
 import { createSlice } from '@reduxjs/toolkit';
+import { CLOCK_FORMAT } from '../../constants/timeText';
 
 const name = 'alarmDate';
 const initialState = {
+  clock: moment().format(CLOCK_FORMAT),
   alarmsById: {},
   allIds: [],
   id: '',
@@ -12,6 +15,9 @@ const alarmDataSlice = createSlice({
   name,
   initialState,
   reducers: {
+    setClock(state) {
+      state.clock = moment().format(CLOCK_FORMAT);
+    },
     saveAlarm(state, action) {
       const { date, time } = action.payload;
       const id = date + ' ' + time;
@@ -34,5 +40,5 @@ const alarmDataSlice = createSlice({
   },
 });
 
-export const { saveAlarm, removeAlarm, saveCurrentId, initializeRingedId } = alarmDataSlice.actions;
+export const { setClock, saveAlarm, removeAlarm, saveCurrentId, initializeRingedId } = alarmDataSlice.actions;
 export default alarmDataSlice.reducer;
