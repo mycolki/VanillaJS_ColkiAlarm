@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+
+import useSound from 'use-sound';
+import click from '../../sound/click.mp3';
 
 import InputWrapper from '../InputWrapper';
 import RadioInputWrapper from '../RadioInputWrapper';
 
-import { saveAlarm } from '../../features/alarmData/alarmDataSlice';
+import { saveAlarm, setError } from '../../features/alarmData/alarmDataSlice';
+import { ERROR } from '../../constants/errorText';
 import { ALARM, ALARM_MODE, ALARM_KIND, RADIO_TITLE, BUTTON } from '../../constants/inputText';
 
 function RegisterAlarm() {
   const dispatch = useDispatch();
+  const [playClickSound] = useSound(click, { volume: 0.5 });
   const [inputValue, setInputValue] = useState({
     title: "",
     date: "",
@@ -28,7 +33,15 @@ function RegisterAlarm() {
 
   const submitData = ev => {
     ev.preventDefault();
-    dispatch(saveAlarm(inputValue));
+    playClickSound();
+
+    try {
+      dispatch(saveAlarm(inputValue));
+    } catch (err) {
+      console.error(ERROR.SAME_KEY.NAME, err.message);
+      dispatch(setError(ERROR.SAME_KEY));
+    }
+
     setInputValue({
       title: "",
       date: "",

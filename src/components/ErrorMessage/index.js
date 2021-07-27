@@ -1,39 +1,30 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { CLOSE_ALARM } from '../../constants/messageTest';
+import { ERROR_CLOSE, ERROR_ICON } from '../../constants/errorText';
 
-function Message({ id, closeMessage }) {
-  const {
-    title,
-    time,
-    kind,
-    message
-  } = useSelector(state => state.alarmData.alarmsById[id]);
-  const mode = useSelector(state => state.alarmData.alarmsById[id]);
-
+function ErrorMessage({ error, closeModal }) {
   const handleClick = ev => {
     ev.stopPropagation();
-    closeMessage();
+    closeModal();
   };
 
   return (
-    <Wrapper onClick={handleClick}>
-      <span className="title">{time} {title}</span>
-      <span className="message">{message}</span>
+    <Wrapper>
+      <span className="title">{ERROR_ICON}</span>
+      <span className="message">{error.USER_MSG}</span>
       <button
         className="check-button"
         type="button"
-        onClick={closeMessage}
+        onClick={handleClick}
       >
-        {CLOSE_ALARM}
+        {ERROR_CLOSE}
       </button>
     </Wrapper>
   );
 }
 
-export default React.memo(Message);
+export default React.memo(ErrorMessage);
 
 const Wrapper = styled.figure`
   z-index: 20;
@@ -41,7 +32,7 @@ const Wrapper = styled.figure`
   top: 50%;
   left: 50%;
   width: 300px;
-  height: 110px;
+  height: 120px;
   padding: 10px;
   text-align: center;
   border-radius: 25px;
@@ -51,29 +42,28 @@ const Wrapper = styled.figure`
 
   span {
     display: block;
+    margin-bottom: 10px;
   }
 
   .title {
-    font-weight: 600;
-    margin: 5px 0 10px 0;
+    font-size: 20px;
   }
 
   .message {
-    font-size: 14px;
-    margin-bottom: 15px;
+    font-size: 12px;
   }
 
   .check-button {
     padding: 5px 10px;
     border: none;
     border-radius: 10px;
-    background-color: black;
+    background-color: #c0392b;
     color: white;
     transition: all 100ms ease-out;
     box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.4);
 
     &:hover {
-      background-color: #c0392b;
+      background-color: black;
       transform: scale(1.03);
     }
   }

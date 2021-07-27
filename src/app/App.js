@@ -2,22 +2,38 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+import basic from '../sound/basic.mp3';
+import useSound from 'use-sound';
+
 import Header from '../components/Header';
 import RegisterAlarm from '../components/RegisterAlarm';
 import AlarmsViewer from '../components/AlarmList';
 import ModalWrapper from '../components/ModalWrapper';
 import Message from '../components/Message';
+import ErrorMessage from '../components/ErrorMessage';
 
-import { setClock, removeAlarm, initializeRingedId } from '../features/alarmData/alarmDataSlice';
+import { openModal } from '../features/activateModal/activateModalSlice';
+import { setClock, removeAlarm, initializeRingedId, setError } from '../features/alarmData/alarmDataSlice';
 
 export default function App() {
   const dispatch = useDispatch();
   const { clock } = useSelector(state => state.alarmData)
   const { isTimeToAlarm, id } = useSelector(state => state.alarmData);
+  const { hasError, error } = useSelector(state => state.alarmData);
+  const { shouldOpenModal } = useSelector(state => state.activateModal);
+
+  const [basicMode] = useSound(basic, { volume: 0.5 });
+
+  useEffect(() => {
+    if (!hasError) return;
+
+    const readyToOpenModal = () => dispatch(openModal());
+    readyToOpenModal();
+    return () => dispatch(setError());
+  }, [dispatch, hasError]);
 
   useEffect(() => {
     const clockId = setInterval(() => dispatch(setClock()), 1000);
-
     return () => clearInterval(clockId);
   }, [dispatch]);
 
@@ -25,6 +41,8 @@ export default function App() {
     dispatch(initializeRingedId());
     dispatch(removeAlarm(id))
   };
+
+  const toggleModal = () => dispatch(openModal());
 
   return (
     <Container>
@@ -39,6 +57,11 @@ export default function App() {
             id={id}
             closeMessage={closeMessage}
           />
+        </ModalWrapper>
+      )}
+      {shouldOpenModal && (
+        <ModalWrapper closeModal={toggleModal}>
+          <ErrorMessage error={error} closeModal={toggleModal} />
         </ModalWrapper>
       )}
     </Container>

@@ -1,14 +1,18 @@
-import moment from 'moment';
 import { createSlice } from '@reduxjs/toolkit';
-import { CLOCK_FORMAT } from '../../constants/timeText';
+import moment from 'moment';
 
-const name = 'alarmDate';
+import { CLOCK_FORMAT } from '../../constants/timeText';
+import { ERROR } from '../../constants/errorText';
+
+const name = 'alarmData';
 const initialState = {
   clock: moment().format(CLOCK_FORMAT),
   alarmsById: {},
   allIds: [],
   id: '',
   isTimeToAlarm: false,
+  hasError: false,
+  error: '',
 };
 
 const alarmDataSlice = createSlice({
@@ -21,6 +25,9 @@ const alarmDataSlice = createSlice({
     saveAlarm(state, action) {
       const { date, time } = action.payload;
       const id = date + ' ' + time;
+
+      if (state.alarmsById[id]) throw Error(ERROR.SAME_KEY.CONSOLE_MSG);
+
       state.allIds.push(id);
       state.alarmsById[id] = action.payload;
     },
@@ -37,8 +44,20 @@ const alarmDataSlice = createSlice({
       state.id = '';
       state.isTimeToAlarm = false;
     },
+    setError(state, action) {
+      state.hasError = !state.hasError;
+      state.error = action.payload;
+    }
   },
 });
 
-export const { setClock, saveAlarm, removeAlarm, saveCurrentId, initializeRingedId } = alarmDataSlice.actions;
+export const {
+  setClock,
+  saveAlarm,
+  removeAlarm,
+  saveCurrentId,
+  initializeRingedId,
+  setError,
+} = alarmDataSlice.actions;
+
 export default alarmDataSlice.reducer;

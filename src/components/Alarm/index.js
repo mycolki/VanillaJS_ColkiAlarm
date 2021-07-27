@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import { removeAlarm, saveCurrentId } from '../../features/alarmData/alarmDataSlice';
 import { TIME_FORMAT, ALARM_TIME } from '../../constants/timeText';
@@ -14,9 +14,9 @@ export default function Alarm({ clock, id, alarm }) {
 
   useEffect(() => {
     if (isTimeToAlarm) return;
-    const thisTime = moment().format(TIME_FORMAT);
+    const now = moment().format(TIME_FORMAT);
 
-    if (moment(thisTime).isSame(id)) {
+    if (moment(now).isSame(id)) {
       dispatch(saveCurrentId(id));
     }
   }, [id, isTimeToAlarm, dispatch, clock]);
