@@ -1,43 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import styled from 'styled-components';
 
+import { removeAlarm, saveCurrentId } from '../../features/alarmData/alarmDataSlice';
 import { TIME_FORMAT, ALARM_TIME } from '../../constants/timeText';
 import { MODE_ICON, KIND_ICON, ONLY_BASIC } from '../../constants/alarmItemText';
 
-export default function Alarm({ alarm, timeId, cancelAlarm, showPopup }) {
+export default function Alarm({ clock, id, alarm }) {
   const { title, date, time, mode, kind } = alarm;
-  const [checkedAlarm, setCheckedAlarm] = useState(false);
+  const { isTimeToAlarm } = useSelector(state => state.alarmData);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (checkedAlarm) return;
+    if (isTimeToAlarm) return;
     const thisTime = moment().format(TIME_FORMAT);
 
-    if (moment(thisTime).isSame(timeId)) {
-      setCheckedAlarm(true);
-      cancelAlarm(timeId);
-      showPopup(timeId);
+    if (moment(thisTime).isSame(id)) {
+      dispatch(saveCurrentId(id));
     }
-  }, [timeId, checkedAlarm, cancelAlarm, showPopup]);
+  }, [id, isTimeToAlarm, dispatch, clock]);
 
-  const cancelClickedAlarm = () => cancelAlarm(timeId);
+  const cancelClickedAlarm = () => dispatch(removeAlarm(id));
 
   return (
     <AlarmWrapper>
       <Time>
-        <span className="date">
-          {moment(date).format(ALARM_TIME)}
-        </span>
+        <span className="date">{moment(date).format(ALARM_TIME)}</span>
         <span className="time">{time}</span>
         <span>{title}</span>
       </Time>
+
       <Icons>
         <span alt="mode">{MODE_ICON[mode]}</span>
         <span alt="kind">{KIND_ICON[kind]}</span>
         {(mode === ONLY_BASIC) && (
-          <Button type="button" alt="mute">🔕</Button>
+          <Button
+            type="button"
+            alt="mute"
+          >
+            🔕
+          </Button>
         )}
-        <Button type="button" alt="remove" onClick={cancelClickedAlarm}>✖️</Button>
+        <Button
+          type="button"
+          alt="remove"
+          onClick={cancelClickedAlarm}
+        >
+          ✖️
+        </Button>
       </Icons>
     </AlarmWrapper>
   );

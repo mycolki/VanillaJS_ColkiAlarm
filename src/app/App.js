@@ -9,9 +9,8 @@ import AlarmsViewer from '../components/AlarmList';
 import ModalWrapper from '../components/ModalWrapper';
 import Message from '../components/Message';
 
-import { removeAlarm } from '../features/alarmData/alarmDataSlice';
+import { removeAlarm, initializeRingedId } from '../features/alarmData/alarmDataSlice';
 import { CLOCK_FORMAT } from '../constants/timeText';
-import { saveId, removeId } from '../features/modal/modalSlice';
 
 export default function App() {
   const [clock, setClock] = useState(moment().format(CLOCK_FORMAT));
@@ -22,32 +21,25 @@ export default function App() {
     return () => clearInterval(clockId);
   }, []);
 
-  const { alarmsById } = useSelector(state => state.alarmData);
-  const { canShow, id } = useSelector(state => state.modal);
-
+  const { isTimeToAlarm, id } = useSelector(state => state.alarmData);
   const dispatch = useDispatch();
-
-  const cancelAlarm = id => dispatch(removeAlarm(id));
-  const showPopup = id => dispatch(saveId(id));
-  const hidePopup = () => dispatch(removeId());
+  const closeMessage = () => {
+    dispatch(initializeRingedId());
+    dispatch(removeAlarm(id))
+  };
 
   return (
     <Container>
       <Header clock={clock} />
       <Section>
         <RegisterAlarm />
-        <AlarmsViewer
-          cancelAlarm={cancelAlarm}
-          showPopup={showPopup}
-        />
+        <AlarmsViewer clock={clock} />
       </Section>
-      {canShow && (
-        <ModalWrapper hidePopup={hidePopup}>
+      {isTimeToAlarm && (
+        <ModalWrapper closeModal={closeMessage}>
           <Message
-            hidePopup={hidePopup}
-            alarmTitle={alarmsById[id].title}
-            time={alarmsById[id].time}
-            message={alarmsById[id].message}
+            id={id}
+            closeMessage={closeMessage}
           />
         </ModalWrapper>
       )}

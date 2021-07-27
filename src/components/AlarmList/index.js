@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Alarm from '../Alarm';
 
-export default function AlarmsViewer({ cancelAlarm, showPopup }) {
+export default function AlarmsViewer({ clock }) {
   const { alarmsById, allIds } = useSelector(state => state.alarmData);
 
   return (
@@ -12,11 +12,10 @@ export default function AlarmsViewer({ cancelAlarm, showPopup }) {
       <ul>
         {allIds && allIds.map((id, index) => (
           <Alarm
+            clock={clock}
             key={id}
-            timeId={allIds[index]}
+            id={allIds[index]}
             alarm={alarmsById[allIds[index]]}
-            cancelAlarm={cancelAlarm}
-            showPopup={showPopup}
           />
         ))}
       </ul>

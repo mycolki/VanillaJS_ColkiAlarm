@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function ModalWrapper({ children, hidePopup }) {
+export default function ModalWrapper({ children, closeModal }) {
   return (
-    <Dimmed onClick={hidePopup}>
+    <Dimmed onClick={closeModal}>
       {children}
     </Dimmed>
   );

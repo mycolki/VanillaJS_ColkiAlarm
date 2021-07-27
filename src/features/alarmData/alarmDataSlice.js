@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const name = "alarmDate";
+const name = 'alarmDate';
 const initialState = {
   alarmsById: {},
   allIds: [],
+  id: '',
+  isTimeToAlarm: false,
 };
 
 const alarmDataSlice = createSlice({
   name,
   initialState,
-reducers: {
+  reducers: {
     saveAlarm(state, action) {
       const { date, time } = action.payload;
       const id = date + ' ' + time;
@@ -21,8 +23,16 @@ reducers: {
       delete state.alarmsById.id;
       state.allIds = state.allIds.filter(savedId => savedId !== id);
     },
+    saveCurrentId(state, action) {
+      state.id = action.payload;
+      state.isTimeToAlarm = true;
+    },
+    initializeRingedId(state) {
+      state.id = '';
+      state.isTimeToAlarm = false;
+    },
   },
 });
 
-export const { saveAlarm, removeAlarm } = alarmDataSlice.actions;
+export const { saveAlarm, removeAlarm, saveCurrentId, initializeRingedId } = alarmDataSlice.actions;
 export default alarmDataSlice.reducer;

@@ -1,1 +1,1 @@
-export const MSG_TEXT = "1건의 알림메시지가 있습니다 ✉️";
+export const CLOSE_ALARM = '알람 끄기';
