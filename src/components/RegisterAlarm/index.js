@@ -96,14 +96,15 @@ const Container = styled.div`
   margin: 5px;
   text-align: center;
   border-radius: 30px;
-  background-color: white;
+  border: 0.3px solid #FFFFFF70;
+  background-color: #FFFFFF80;
+  box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.1);
 
   input {
     border: 0;
     padding: 15px;
     text-align: center;
     border-radius: 10px;
-    background-color: lightGray;
   }
 `;
 

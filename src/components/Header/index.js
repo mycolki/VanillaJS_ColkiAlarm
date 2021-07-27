@@ -12,7 +12,6 @@ export default function Header({ clock }) {
 
 const Container = styled.div`
   text-align: center;
-  color: white;
 
   .app-title {
     margin: 0;
@@ -23,5 +22,6 @@ const Container = styled.div`
     margin: 0;
     padding-bottom: 10px;
     font-size: 20px;
+    color: white;
   }
 `;

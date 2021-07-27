@@ -19,5 +19,5 @@ export default function RadioInput({ item: { type, name, text }, sendInputValue 
 }
 
 const Wrapper = styled.span`
-  margin-right: 5px;
+  padding: 15px;
 `;

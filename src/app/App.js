@@ -39,7 +39,7 @@ const Container = styled.div`
   height: 100vh;
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
-  background-color: black;
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
 
   input {
     outline: none;

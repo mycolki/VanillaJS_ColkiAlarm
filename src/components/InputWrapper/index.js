@@ -9,6 +9,7 @@ export default function InputWrapper({ inputInfo: { type, name, text }, value, s
         type={type}
         name={name}
         value={value}
+        maxLength="15"
         onChange={sendInputValue}
       />
     </Wrapper>
@@ -27,5 +28,6 @@ const Wrapper = styled.div`
 
   input {
     width: 200px;
+    background-color: #b1cfff;
   }
 `;
