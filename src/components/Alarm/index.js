@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { TIME_FORMAT, ALARM_TIME } from '../../constants/timeText';
 import { MODE_ICON, KIND_ICON, ONLY_BASIC } from '../../constants/alarmItemText';
 
-export default function Alarm({ alarm, timeId, cancelAlarm }) {
+export default function Alarm({ alarm, timeId, cancelAlarm, showPopup }) {
   const { title, date, time, mode, kind } = alarm;
   const [checkedAlarm, setCheckedAlarm] = useState(false);
 
@@ -14,11 +14,11 @@ export default function Alarm({ alarm, timeId, cancelAlarm }) {
     const thisTime = moment().format(TIME_FORMAT);
 
     if (moment(thisTime).isSame(timeId)) {
-      alert('알람');
       setCheckedAlarm(true);
-      cancelAlarm(timeId)
+      cancelAlarm(timeId);
+      showPopup(timeId);
     }
-  }, [timeId, checkedAlarm, cancelAlarm]);
+  }, [timeId, checkedAlarm, cancelAlarm, showPopup]);
 
   const cancelClickedAlarm = () => cancelAlarm(timeId);
 
@@ -32,8 +32,8 @@ export default function Alarm({ alarm, timeId, cancelAlarm }) {
         <span>{title}</span>
       </Time>
       <Icons>
-        <span>{MODE_ICON[mode]}</span>
-        <span>{KIND_ICON[kind]}</span>
+        <span alt="mode">{MODE_ICON[mode]}</span>
+        <span alt="kind">{KIND_ICON[kind]}</span>
         {(mode === ONLY_BASIC) && (
           <Button type="button" alt="mute">🔕</Button>
         )}

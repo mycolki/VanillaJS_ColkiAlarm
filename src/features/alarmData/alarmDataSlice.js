@@ -20,9 +20,9 @@ reducers: {
       const id = action.payload;
       delete state.alarmsById.id;
       state.allIds = state.allIds.filter(savedId => savedId !== id);
-    }
+    },
   },
 });
 
-export const { saveAlarm, removeAlarm} = alarmDataSlice.actions;
+export const { saveAlarm, removeAlarm } = alarmDataSlice.actions;
 export default alarmDataSlice.reducer;
