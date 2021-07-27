@@ -16,5 +16,4 @@ const activateModalSlice = createSlice({
 });
 
 export const { openModal, closeModal } = activateModalSlice.actions;
-
 export default activateModalSlice.reducer;

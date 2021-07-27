@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import basic from '../sound/basic.mp3';
 import useSound from 'use-sound';
+import click from '../sound/click.mp3';
 
 import Header from '../components/Header';
 import RegisterAlarm from '../components/RegisterAlarm';
@@ -21,8 +21,6 @@ export default function App() {
   const { isTimeToAlarm, id } = useSelector(state => state.alarmData);
   const { hasError, error } = useSelector(state => state.alarmData);
   const { shouldOpenModal } = useSelector(state => state.activateModal);
-
-  const [basicMode] = useSound(basic, { volume: 0.5 });
 
   useEffect(() => {
     if (!hasError) return;
@@ -42,7 +40,12 @@ export default function App() {
     dispatch(removeAlarm(id))
   };
 
-  const toggleModal = () => dispatch(openModal());
+  const [playClickSound] = useSound(click, { volume: 0.5 });
+  const closeErrorMessage = () => {
+    dispatch(openModal());
+    playClickSound();
+
+  }
 
   return (
     <Container>
@@ -51,6 +54,7 @@ export default function App() {
         <RegisterAlarm />
         <AlarmsViewer clock={clock} />
       </Section>
+
       {isTimeToAlarm && (
         <ModalWrapper closeModal={closeMessage}>
           <Message
@@ -59,9 +63,10 @@ export default function App() {
           />
         </ModalWrapper>
       )}
+
       {shouldOpenModal && (
-        <ModalWrapper closeModal={toggleModal}>
-          <ErrorMessage error={error} closeModal={toggleModal} />
+        <ModalWrapper closeModal={closeErrorMessage}>
+          <ErrorMessage error={error} closeModal={closeErrorMessage} />
         </ModalWrapper>
       )}
     </Container>

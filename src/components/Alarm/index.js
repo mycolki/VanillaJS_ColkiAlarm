@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import moment from 'moment';
 
+import useSound from 'use-sound';
+import alarmClick from '../../sound/alarmClick.mp3';
+
 import { removeAlarm, saveCurrentId } from '../../features/alarmData/alarmDataSlice';
 import { TIME_FORMAT, ALARM_TIME } from '../../constants/timeText';
 import { MODE_ICON, KIND_ICON, ONLY_BASIC } from '../../constants/alarmItemText';
@@ -21,7 +24,11 @@ export default function Alarm({ clock, id, alarm }) {
     }
   }, [id, isTimeToAlarm, dispatch, clock]);
 
-  const cancelClickedAlarm = () => dispatch(removeAlarm(id));
+  const [alarmClickSound] = useSound(alarmClick, { volume: 0.5 });
+  const cancelClickedAlarm = () => {
+    dispatch(removeAlarm(id));
+    alarmClickSound();
+  }
 
   return (
     <AlarmWrapper>

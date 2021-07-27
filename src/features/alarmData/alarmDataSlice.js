@@ -47,7 +47,7 @@ const alarmDataSlice = createSlice({
     setError(state, action) {
       state.hasError = !state.hasError;
       state.error = action.payload;
-    }
+    },
   },
 });
 
@@ -59,5 +59,4 @@ export const {
   initializeRingedId,
   setError,
 } = alarmDataSlice.actions;
-
 export default alarmDataSlice.reducer;
