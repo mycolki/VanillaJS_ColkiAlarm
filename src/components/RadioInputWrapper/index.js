@@ -6,7 +6,7 @@ import RadioInput from '../RadioInput';
 export default function RadioInputWrapper({ radioTitle, alarmStyle, value, sendInputValue }) {
   return (
     <Wrapper>
-      <span>{radioTitle}</span>
+      <span className="title">{radioTitle}</span>
       <div>
         {Object.values(alarmStyle).map(item => (
           <RadioInput
@@ -23,6 +23,12 @@ export default function RadioInputWrapper({ radioTitle, alarmStyle, value, sendI
 
 const Wrapper = styled.div`
   padding: 10px;
+  font-size: 14px;
+
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+  }
 
   div {
     margin-bottom: 10px;

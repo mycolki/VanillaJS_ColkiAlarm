@@ -6,19 +6,19 @@ export const ALARM = {
 };
 
 export const ALARM_MODE = {
-  BASIC: { type: 'mode', name:'basic-mode', text: '일반 모드'},
-  VIBRATION: { type: 'mode', name: 'vibration-mode', text: '진동 모드'},
-  NIGHT: { type: 'mode', name: 'night-mode', text: '야간 모드'},
+  BASIC: { type: 'mode', name:'basic-mode', text: '기본'},
+  VIBRATION: { type: 'mode', name: 'vibration-mode', text: '진동'},
+  NIGHT: { type: 'mode', name: 'night-mode', text: '수면'},
 };
 
 export const ALARM_KIND = {
-  BASIC: { type: 'kind', name: 'basic-alarm', text: '일반 알람'},
-  EMERGENCY: { type: 'kind', name: 'emergency-alarm', text: '긴급 알람'},
+  BASIC: { type: 'kind', name: 'basic-alarm', text: '항상'},
+  EMERGENCY: { type: 'kind', name: 'emergency-alarm', text: '긴급'},
 };
 
 export const RADIO_TITLE = {
-  MODE: '알람 모드를 선택하세요',
-  KIND: '알람 종류를 선택하세요'
+  MODE: '알람 모드(Sound)',
+  KIND: '알람 종류(긴급은 수면모드에도 울려요)'
 };
 
 export const BUTTON = {

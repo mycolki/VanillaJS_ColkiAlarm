@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export default function InputWrapper({ inputInfo: { type, name, text }, value, sendInputValue }) {
   return (
     <Wrapper>
-      <span>{text}</span>
+      <span className="title">{text}</span>
       <input
         type={type}
         name={name}
@@ -18,9 +18,11 @@ export default function InputWrapper({ inputInfo: { type, name, text }, value, s
 const Wrapper = styled.div`
   padding: 10px;
 
-  span {
+  .title {
     display: block;
     margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
   }
 
   input {

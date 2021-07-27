@@ -3,30 +3,32 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import Alarm from '../Alarm';
-import { sortIds } from '../../utils/viewAlarmData';
 
-export default function AlarmsViewer() {
+export default function AlarmsViewer({ cancelAlarm }) {
   const { alarmsById, allIds } = useSelector(state => state.alarmData);
 
   return (
     <Container>
       <ul>
-        {allIds && sortIds(allIds).map((id, index) => (
+        {allIds && allIds.map((id, index) => (
           <Alarm
             key={id}
-            timeId={[allIds[index]]}
+            timeId={allIds[index]}
             alarm={alarmsById[allIds[index]]}
+            cancelAlarm={cancelAlarm}
           />
         ))}
       </ul>
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: lightPink;
+  margin: 5px;
+  border-radius: 30px;
+  background-color: white;
 
   ul {
     padding: 10px;

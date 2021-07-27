@@ -5,10 +5,10 @@ import { useDispatch } from 'react-redux';
 import InputWrapper from '../InputWrapper';
 import RadioInputWrapper from '../RadioInputWrapper';
 
-import { saveData } from '../../features/alarmData/alarmDataSlice';
+import { saveAlarm } from '../../features/alarmData/alarmDataSlice';
 import { ALARM, ALARM_MODE, ALARM_KIND, RADIO_TITLE, BUTTON } from '../../constants/inputText';
 
-export default function RegisterAlarm() {
+function RegisterAlarm() {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState({
     title: "",
@@ -28,7 +28,7 @@ export default function RegisterAlarm() {
 
   const submitData = ev => {
     ev.preventDefault();
-    dispatch(saveData(inputValue));
+    dispatch(saveAlarm(inputValue));
     setInputValue({
       title: "",
       date: "",
@@ -84,6 +84,8 @@ export default function RegisterAlarm() {
   );
 }
 
+export default React.memo(RegisterAlarm);
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -91,13 +93,17 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  margin: 5px;
   text-align: center;
-  background-color: lightsteelblue;
+  border-radius: 30px;
+  background-color: white;
 
   input {
     border: 0;
-    padding: 10px;
+    padding: 15px;
     text-align: center;
+    border-radius: 10px;
+    background-color: lightGray;
   }
 `;
 
@@ -105,6 +111,8 @@ const Button = styled.button`
   margin-top: 10px;
   padding: 10px;
   border: 0;
-  border-radius: 20px;
+  border-radius: 10px;
   cursor: pointer;
+  background-color: black;
+  color: white;
 `;
