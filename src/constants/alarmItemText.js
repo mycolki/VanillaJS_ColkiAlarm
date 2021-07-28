@@ -1,7 +1,7 @@
 export const MODE_ICON = {
   'basic-mode': '',
   'vibration-mode': '',
-  'night-mode': '🌙'
+  'night-mode': '🌙',
 };
 
 export const KIND_ICON = {

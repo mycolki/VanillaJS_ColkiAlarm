@@ -7,7 +7,7 @@ import click from '../sound/click.mp3';
 
 import Header from '../components/Header';
 import RegisterAlarm from '../components/RegisterAlarm';
-import AlarmsViewer from '../components/AlarmList';
+import AlarmList from '../components/AlarmList';
 import ModalWrapper from '../components/ModalWrapper';
 import Message from '../components/Message';
 import ErrorMessage from '../components/ErrorMessage';
@@ -38,7 +38,7 @@ export default function App() {
 
   const closeMessage = () => {
     dispatch(initializeRingedId());
-    dispatch(removeAlarm(id))
+    dispatch(removeAlarm(id));
   };
 
   const [playClickSound] = useSound(click, { volume: 0.5 });
@@ -52,7 +52,7 @@ export default function App() {
       <Header clock={clock} />
       <Section>
         <RegisterAlarm />
-        <AlarmsViewer clock={clock} />
+        <AlarmList clock={clock} />
       </Section>
 
       {isTimeToAlarm && (
