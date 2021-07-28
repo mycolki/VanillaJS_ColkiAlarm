@@ -103,11 +103,12 @@ const Time = styled.div`
 
   .time {
     margin-right: 10px;
-    font-size: 15px;
+    font-size: 13px;
   }
 
   .title {
     color: white;
+    font-size: 14px;
   }
 `;
 
