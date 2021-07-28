@@ -6,7 +6,7 @@ import moment from 'moment';
 import useSound from 'use-sound';
 import alarmClick from '../../sound/alarmClick.mp3';
 
-import { removeAlarm, saveCurrentId } from '../../features/alarmData/alarmDataSlice';
+import { removeAlarm, saveCurrentId, changeAlarmMode } from '../../features/alarmData/alarmDataSlice';
 import { TIME_FORMAT, ALARM_TIME } from '../../constants/timeText';
 import { MODE_ICON, KIND_ICON, ONLY_BASIC } from '../../constants/alarmItemText';
 
@@ -17,18 +17,21 @@ export default function Alarm({ clock, id, alarm }) {
 
   useEffect(() => {
     if (isTimeToAlarm) return;
-    const now = moment().format(TIME_FORMAT);
 
-    if (moment(now).isSame(id)) {
-      dispatch(saveCurrentId(id));
-    }
+    const now = moment().format(TIME_FORMAT);
+    if (moment(now).isSame(id)) dispatch(saveCurrentId(id));
   }, [id, isTimeToAlarm, dispatch, clock]);
 
   const [alarmClickSound] = useSound(alarmClick, { volume: 0.5 });
+  const muteAlarmSound = () => {
+    dispatch(changeAlarmMode(id));
+    alarmClickSound();
+  };
+
   const cancelClickedAlarm = () => {
     dispatch(removeAlarm(id));
     alarmClickSound();
-  }
+  };
 
   return (
     <AlarmWrapper>
@@ -45,6 +48,7 @@ export default function Alarm({ clock, id, alarm }) {
           <Button
             type="button"
             alt="mute"
+            onClick={muteAlarmSound}
           >
             🔕
           </Button>

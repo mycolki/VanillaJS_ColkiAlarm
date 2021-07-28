@@ -38,8 +38,15 @@ function RegisterAlarm() {
     try {
       dispatch(saveAlarm(inputValue));
     } catch (err) {
-      console.error(ERROR.SAME_KEY.NAME, err.message);
-      dispatch(setError(ERROR.SAME_KEY));
+      if (err.message === ERROR.SAME_KEY.CONSOLE_MSG) {
+        console.error(ERROR.SAME_KEY.NAME, err.message);
+        dispatch(setError(ERROR.SAME_KEY));
+      } else {
+        console.error(ERROR.INPUT.NAME, err.message);
+        dispatch(setError(ERROR.INPUT));
+      }
+
+      return;
     }
 
     setInputValue({

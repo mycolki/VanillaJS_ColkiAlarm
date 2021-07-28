@@ -1,18 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import useSound from 'use-sound';
+import errorSound from '../../sound/error.mp3';
 import { ERROR_CLOSE, ERROR_ICON } from '../../constants/errorText';
 
 function ErrorMessage({ error, closeModal }) {
+  const [errorClickSound] = useSound(errorSound, { volume: 0.5 });
   const handleClick = ev => {
     ev.stopPropagation();
+    errorClickSound();
     closeModal();
   };
 
   return (
     <Wrapper>
       <span className="title">{ERROR_ICON}</span>
-      <span className="message">{error.USER_MSG}</span>
+      <span className="message">{error?.USER_MSG}</span>
       <button
         className="check-button"
         type="button"

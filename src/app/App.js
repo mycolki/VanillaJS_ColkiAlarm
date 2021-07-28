@@ -44,8 +44,7 @@ export default function App() {
   const closeErrorMessage = () => {
     dispatch(openModal());
     playClickSound();
-
-  }
+  };
 
   return (
     <Container>
@@ -66,7 +65,10 @@ export default function App() {
 
       {shouldOpenModal && (
         <ModalWrapper closeModal={closeErrorMessage}>
-          <ErrorMessage error={error} closeModal={closeErrorMessage} />
+          <ErrorMessage
+            error={error}
+            closeModal={closeErrorMessage}
+          />
         </ModalWrapper>
       )}
     </Container>

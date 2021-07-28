@@ -2,8 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { CLOSE_ALARM } from '../../constants/messageTest';
-
+import useSound from 'use-sound';
+import alarmClick from '../../sound/alarmClick.mp3';
+import { ALARM_MSG, EMERGENCY, CLOSE_ALARM } from '../../constants/messageTest';
+import { ALARM_MODE, ALARM_KIND } from '../../constants/inputText';
 function Message({ id, closeMessage }) {
   const {
     title,
@@ -11,21 +13,33 @@ function Message({ id, closeMessage }) {
     kind,
     message
   } = useSelector(state => state.alarmData.alarmsById[id]);
-  const mode = useSelector(state => state.alarmData.alarmsById[id]);
+  const { mode } = useSelector(state => state.alarmData.alarmsById[id]);
+
 
   const handleClick = ev => {
     ev.stopPropagation();
     closeMessage();
   };
 
+  const [alarmClickSound] = useSound(alarmClick, { volume: 0.5 });
+  const handleButtonClick = () => {
+    alarmClickSound();
+    closeMessage();
+  };
+
+  const alarmSound = (kind === ALARM_KIND.EMERGENCY.name)
+    ? EMERGENCY + ALARM_MSG[ALARM_MODE.BASIC.name]
+    : ALARM_MSG[mode];
+
   return (
     <Wrapper onClick={handleClick}>
       <span className="title">{time} {title}</span>
       <span className="message">{message}</span>
+      <span className="alarm">{alarmSound}</span>
       <button
         className="check-button"
         type="button"
-        onClick={closeMessage}
+        onClick={handleButtonClick}
       >
         {CLOSE_ALARM}
       </button>
@@ -41,7 +55,7 @@ const Wrapper = styled.figure`
   top: 50%;
   left: 50%;
   width: 300px;
-  height: 110px;
+  height: 160px;
   padding: 10px;
   text-align: center;
   border-radius: 25px;
@@ -55,12 +69,18 @@ const Wrapper = styled.figure`
 
   .title {
     font-weight: 600;
-    margin: 5px 0 10px 0;
+    margin: 5px 0 20px 0;
   }
 
   .message {
     font-size: 14px;
     margin-bottom: 15px;
+  }
+
+  .alarm {
+    margin-bottom: 15px;
+    font-size: 11px;
+    color: tomato;
   }
 
   .check-button {

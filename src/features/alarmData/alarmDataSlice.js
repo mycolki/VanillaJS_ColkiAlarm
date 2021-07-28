@@ -12,7 +12,7 @@ const initialState = {
   id: '',
   isTimeToAlarm: false,
   hasError: false,
-  error: '',
+  error: ERROR.INPUT,
 };
 
 const alarmDataSlice = createSlice({
@@ -26,6 +26,7 @@ const alarmDataSlice = createSlice({
       const { date, time } = action.payload;
       const id = date + ' ' + time;
 
+      if (!Object.values(action.payload).every(val => val)) throw Error(ERROR.INPUT.CONSOLE_MSG);
       if (state.alarmsById[id]) throw Error(ERROR.SAME_KEY.CONSOLE_MSG);
 
       state.allIds.push(id);
@@ -35,6 +36,10 @@ const alarmDataSlice = createSlice({
       const id = action.payload;
       delete state.alarmsById.id;
       state.allIds = state.allIds.filter(savedId => savedId !== id);
+    },
+    changeAlarmMode(state, action) {
+      const id = action.payload;
+      state.alarmsById[id].mode = "vibration-mode";
     },
     saveCurrentId(state, action) {
       state.id = action.payload;
@@ -46,7 +51,7 @@ const alarmDataSlice = createSlice({
     },
     setError(state, action) {
       state.hasError = !state.hasError;
-      state.error = action.payload;
+      state.error = action.payload ? action.payload : ERROR.INPUT;
     },
   },
 });
@@ -55,6 +60,7 @@ export const {
   setClock,
   saveAlarm,
   removeAlarm,
+  changeAlarmMode,
   saveCurrentId,
   initializeRingedId,
   setError,
