@@ -123,7 +123,7 @@ const Container = styled.div`
 
   input {
     border: 0;
-    padding: 15px;
+    padding: 12px;
     text-align: center;
     border-radius: 10px;
   }
