@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Alarm from '../Alarm';
+import { BOX_SHADOW } from '../../constants/cssStyle';
 
-export default function AlarmsViewer({ clock }) {
+export default function AlarmList({ clock }) {
   const { alarmsById, allIds } = useSelector(state => state.alarmData);
 
   return (
@@ -24,7 +25,7 @@ export default function AlarmsViewer({ clock }) {
   );
 }
 
-AlarmsViewer.propTypes = {
+AlarmList.propTypes = {
   clock: PropTypes.string.isRequired,
 };
 
@@ -33,9 +34,9 @@ const Container = styled.div`
   height: 100%;
   margin: 5px;
   border-radius: 30px;
-  border: 0.3px solid #FFFFFF70;
-  background-color: #B1CFFF;
-  box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.1);
+  border: 3px solid #FFFFFF70;
+  background-color: #0984e320;
+  box-shadow: ${BOX_SHADOW};
 
   ul {
     padding: 10px;

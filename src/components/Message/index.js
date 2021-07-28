@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import useSound from 'use-sound';
 import alarmClick from '../../sound/alarmClick.mp3';
 
+import { BOX_SHADOW, MESSAGE_BG_COLOR, MAIN_BLUE_COLOR } from '../../constants/cssStyle';
 import { ALARM_MSG, EMERGENCY, CLOSE_ALARM } from '../../constants/messageTest';
 import { ALARM_MODE, ALARM_KIND } from '../../constants/inputText';
 
@@ -66,17 +67,18 @@ const Wrapper = styled.figure`
   padding: 10px;
   text-align: center;
   border-radius: 25px;
-  background-color: white;
+  background-color: ${MESSAGE_BG_COLOR};
   transform: translate(-50%, -50%);
-  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: ${BOX_SHADOW};
 
   span {
     display: block;
   }
 
   .title {
-    font-weight: 600;
     margin: 5px 0 20px 0;
+    font-weight: 600;
+    color: white;
   }
 
   .message {
@@ -87,20 +89,20 @@ const Wrapper = styled.figure`
   .alarm {
     margin-bottom: 15px;
     font-size: 11px;
-    color: tomato;
+    color: #4A81D9;
   }
 
   .check-button {
     padding: 5px 10px;
     border: none;
     border-radius: 10px;
-    background-color: black;
+    background-color: ${MAIN_BLUE_COLOR};
     color: white;
     transition: all 100ms ease-out;
-    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: ${BOX_SHADOW};
 
     &:hover {
-      background-color: #c0392b;
+      background-color: black;
       transform: scale(1.03);
     }
   }

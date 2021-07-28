@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import useSound from 'use-sound';
 import alarmClick from '../../sound/alarmClick.mp3';
 
+import { BOX_SHADOW, MAIN_BLUE_COLOR, MESSAGE_BG_COLOR } from '../../constants/cssStyle';
 import { ERROR_CLOSE, ERROR_ICON } from '../../constants/errorText';
 
 function ErrorMessage({ error, closeModal }) {
@@ -51,9 +52,9 @@ const Wrapper = styled.figure`
   padding: 10px;
   text-align: center;
   border-radius: 25px;
-  background-color: white;
+  background-color: ${MESSAGE_BG_COLOR};
   transform: translate(-50%, -50%);
-  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: ${BOX_SHADOW};
 
   span {
     display: block;
@@ -72,13 +73,13 @@ const Wrapper = styled.figure`
     padding: 5px 10px;
     border: none;
     border-radius: 10px;
-    background-color: #c0392b;
+    background-color: black;
     color: white;
     transition: all 100ms ease-out;
     box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.4);
 
     &:hover {
-      background-color: black;
+      background-color: ${MAIN_BLUE_COLOR};
       transform: scale(1.03);
     }
   }

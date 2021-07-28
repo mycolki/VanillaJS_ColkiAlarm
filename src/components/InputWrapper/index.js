@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { BOX_SHADOW } from '../../constants/cssStyle';
+
 export default function InputWrapper({ inputInfo: { type, name, text }, value, sendInputValue }) {
   return (
     <Wrapper>
@@ -43,6 +45,7 @@ const Wrapper = styled.div`
 
   input {
     width: 200px;
-    background-color: #b1cfff;
+    background: linear-gradient(#FFFFFF30, #FFFFFF90);
+    box-shadow: ${BOX_SHADOW};
   }
 `;

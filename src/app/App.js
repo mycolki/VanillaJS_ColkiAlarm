@@ -27,6 +27,7 @@ export default function App() {
 
     const readyToOpenModal = () => dispatch(openModal());
     readyToOpenModal();
+
     return () => dispatch(setError());
   }, [dispatch, hasError]);
 
@@ -79,7 +80,7 @@ const Container = styled.div`
   height: 100vh;
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
-  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  background-image: linear-gradient(120deg, #a1c4fd 50%, #c2e9fb 20%);
 
   input {
     outline: none;

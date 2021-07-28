@@ -8,6 +8,7 @@ import useSound from 'use-sound';
 import alarmClick from '../../sound/alarmClick.mp3';
 
 import { removeAlarm, saveCurrentId, changeAlarmMode } from '../../features/alarmData/alarmDataSlice';
+import { GLASS_WHITE_COLOR } from '../../constants/cssStyle';
 import { TIME_FORMAT, ALARM_TIME } from '../../constants/timeText';
 import { MODE_ICON, KIND_ICON, MUTE__ICON, REMOVE_ICON, ONLY_BASIC } from '../../constants/alarmItemText';
 
@@ -40,7 +41,7 @@ export default function Alarm({ clock, id, alarm }) {
       <Time>
         <span className="date">{moment(date).format(ALARM_TIME)}</span>
         <span className="time">{time}</span>
-        <span>{title}</span>
+        <span className="title">{title}</span>
       </Time>
 
       <Icons>
@@ -84,24 +85,29 @@ const AlarmWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
+  padding: 10px 10px;
   font-size: 18px;
   line-height: 16px;
+  border-bottom: 1px solid ${GLASS_WHITE_COLOR};
 `;
 
 const Time = styled.div`
   .date {
-    margin-right: 5px;
-    padding: 0 5px;
+    margin-right: 10px;
+    padding: 1px 5px 3px 5px;
     font-size: 12px;
     border-radius: 5px;
-    background-color: lightGrey;
-    color: white;
+    background-color: #C1E8FB80;
+    color: gray;
   }
 
   .time {
-    margin-right: 5px;
-    font-size: 17px;
+    margin-right: 10px;
+    font-size: 15px;
+  }
+
+  .title {
+    color: white;
   }
 `;
 

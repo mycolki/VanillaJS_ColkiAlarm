@@ -9,13 +9,14 @@ import InputWrapper from '../InputWrapper';
 import RadioInputWrapper from '../RadioInputWrapper';
 
 import { saveAlarm, setError } from '../../features/alarmData/alarmDataSlice';
+import { BOX_SHADOW, BORDER, GLASS_WHITE_COLOR, MAIN_BLUE_COLOR } from '../../constants/cssStyle';
 import { ERROR } from '../../constants/errorText';
 import { ALARM, ALARM_MODE, ALARM_KIND, RADIO_TITLE, BUTTON } from '../../constants/inputText';
 
 function RegisterAlarm() {
   const dispatch = useDispatch();
-  const [playClickSound] = useSound(click, { volume: 0.5 });
-  const [inputValue, setInputValue] = useState({
+  const [ playClickSound ] = useSound(click, { volume: 0.5 });
+  const [ inputValue, setInputValue ] = useState({
     title: "",
     date: "",
     time: "",
@@ -116,9 +117,9 @@ const Container = styled.div`
   margin: 5px;
   text-align: center;
   border-radius: 30px;
-  border: 0.3px solid #FFFFFF70;
-  background-color: #FFFFFF80;
-  box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.1);
+  border: ${BORDER};
+  background-color: ${GLASS_WHITE_COLOR};
+  box-shadow: ${BOX_SHADOW};
 
   input {
     border: 0;
@@ -134,6 +135,12 @@ const Button = styled.button`
   border: 0;
   border-radius: 10px;
   cursor: pointer;
-  background-color: black;
+  background-color: ${MAIN_BLUE_COLOR};
   color: white;
+  box-shadow: ${BOX_SHADOW};
+
+  &:hover {
+    background-color: black;
+    transform: scale(1.03);
+  }
 `;
