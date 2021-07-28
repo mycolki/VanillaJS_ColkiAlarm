@@ -9,11 +9,11 @@ const activateModalSlice = createSlice({
   name,
   initialState,
   reducers: {
-    openModal(state) {
+    toggleModal(state) {
       state.shouldOpenModal = !state.shouldOpenModal;
     },
   },
 });
 
-export const { openModal, closeModal } = activateModalSlice.actions;
+export const { toggleModal } = activateModalSlice.actions;
 export default activateModalSlice.reducer;

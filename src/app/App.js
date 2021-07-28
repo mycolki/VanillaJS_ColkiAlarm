@@ -12,7 +12,7 @@ import ModalWrapper from '../components/ModalWrapper';
 import Message from '../components/Message';
 import ErrorMessage from '../components/ErrorMessage';
 
-import { openModal } from '../features/activateModal/activateModalSlice';
+import { toggleModal } from '../features/activateModal/activateModalSlice';
 import { setClock, removeAlarm, initializeRingedId, setError } from '../features/alarmData/alarmDataSlice';
 
 export default function App() {
@@ -25,7 +25,7 @@ export default function App() {
   useEffect(() => {
     if (!hasError) return;
 
-    const readyToOpenModal = () => dispatch(openModal());
+    const readyToOpenModal = () => dispatch(toggleModal());
     readyToOpenModal();
 
     return () => dispatch(setError());
@@ -39,11 +39,13 @@ export default function App() {
   const closeMessage = () => {
     dispatch(initializeRingedId());
     dispatch(removeAlarm(id));
+    dispatch(setError());
+    dispatch(toggleModal());
   };
 
   const [playClickSound] = useSound(click, { volume: 0.5 });
   const closeErrorMessage = () => {
-    dispatch(openModal());
+    dispatch(toggleModal());
     playClickSound();
   };
 
