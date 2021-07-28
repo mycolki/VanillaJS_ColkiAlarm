@@ -130,7 +130,7 @@ const Container = styled.div`
 `;
 
 const Button = styled.button`
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 10px;
   border: 0;
   border-radius: 10px;
