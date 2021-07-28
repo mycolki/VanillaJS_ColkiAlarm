@@ -8,7 +8,7 @@ export const ALARM = {
 export const ALARM_MODE = {
   BASIC: { type: 'mode', name:'basic-mode', text: '기본' },
   VIBRATION: { type: 'mode', name: 'vibration-mode', text: '진동' },
-  NIGHT: { type: 'mode', name: 'night-mode', text: '수면' },
+  NIGHT: { type: 'mode', name: 'night-mode', text: '야간' },
 };
 
 export const ALARM_KIND = {
