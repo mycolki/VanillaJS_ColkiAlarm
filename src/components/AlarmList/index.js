@@ -30,7 +30,7 @@ AlarmList.propTypes = {
 };
 
 const Container = styled.div`
-  width: 100%;
+  min-width: 350px;
   height: 100%;
   margin: 5px;
   border-radius: 30px;
