@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 export default function ModalWrapper({ children, closeModal }) {
   return (
@@ -8,6 +9,11 @@ export default function ModalWrapper({ children, closeModal }) {
     </Dimmed>
   );
 }
+
+ModalWrapper.propTypes = {
+  children: PropTypes.element.isRequired,
+  closeModal: PropTypes.func.isRequired,
+};
 
 const Dimmed = styled.div`
   position: fixed;

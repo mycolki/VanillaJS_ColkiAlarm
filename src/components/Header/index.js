@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 export default function Header({ clock }) {
   return (
@@ -9,6 +10,10 @@ export default function Header({ clock }) {
     </Container>
   );
 }
+
+Header.propTypes = {
+  clock: PropTypes.string.isRequired,
+};
 
 const Container = styled.div`
   text-align: center;

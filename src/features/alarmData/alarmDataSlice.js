@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 
+import { ALARM_MODE } from '../../constants/inputText';
 import { CLOCK_FORMAT } from '../../constants/timeText';
 import { ERROR } from '../../constants/errorText';
 
@@ -39,7 +40,7 @@ const alarmDataSlice = createSlice({
     },
     changeAlarmMode(state, action) {
       const id = action.payload;
-      state.alarmsById[id].mode = "vibration-mode";
+      state.alarmsById[id].mode = ALARM_MODE.VIBRATION.name;
     },
     saveCurrentId(state, action) {
       state.id = action.payload;

@@ -9,4 +9,7 @@ export const KIND_ICON = {
   'basic-alarm': '',
 };
 
+export const MUTE__ICON = '🔕';
+export const REMOVE_ICON = '✖️';
+
 export const ONLY_BASIC = 'basic-mode';

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import RadioInput from '../RadioInput';
 
@@ -20,6 +21,13 @@ export default function RadioInputWrapper({ radioTitle, alarmStyle, value, sendI
     </Wrapper>
   );
 }
+
+RadioInputWrapper.propTypes = {
+  radioTitle: PropTypes.string.isRequired,
+  alarmStyle: PropTypes.object.isRequired,
+  value: PropTypes.string.isRequired,
+  sendInputValue: PropTypes.func.isRequired,
+};
 
 const Wrapper = styled.div`
   padding: 10px;

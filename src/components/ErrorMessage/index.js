@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import useSound from 'use-sound';
-import errorSound from '../../sound/error.mp3';
+import alarmClick from '../../sound/alarmClick.mp3';
+
 import { ERROR_CLOSE, ERROR_ICON } from '../../constants/errorText';
 
 function ErrorMessage({ error, closeModal }) {
-  const [errorClickSound] = useSound(errorSound, { volume: 0.5 });
+  const [alarmClickSound] = useSound(alarmClick, { volume: 0.5 });
   const handleClick = ev => {
     ev.stopPropagation();
-    errorClickSound();
+    alarmClickSound();
     closeModal();
   };
 
@@ -29,6 +31,15 @@ function ErrorMessage({ error, closeModal }) {
 }
 
 export default React.memo(ErrorMessage);
+
+ErrorMessage.propTypes = {
+  error: PropTypes.object.isRequired,
+  closeMessage: PropTypes.func,
+};
+
+ErrorMessage.defaultProps = {
+  closeMessage: undefined,
+};
 
 const Wrapper = styled.figure`
   z-index: 20;

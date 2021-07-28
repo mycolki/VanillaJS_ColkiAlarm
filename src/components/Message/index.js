@@ -1,11 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import useSound from 'use-sound';
 import alarmClick from '../../sound/alarmClick.mp3';
+
 import { ALARM_MSG, EMERGENCY, CLOSE_ALARM } from '../../constants/messageTest';
 import { ALARM_MODE, ALARM_KIND } from '../../constants/inputText';
+
 function Message({ id, closeMessage }) {
   const {
     title,
@@ -14,7 +17,6 @@ function Message({ id, closeMessage }) {
     message
   } = useSelector(state => state.alarmData.alarmsById[id]);
   const { mode } = useSelector(state => state.alarmData.alarmsById[id]);
-
 
   const handleClick = ev => {
     ev.stopPropagation();
@@ -48,6 +50,11 @@ function Message({ id, closeMessage }) {
 }
 
 export default React.memo(Message);
+
+Message.propTypes = {
+  id: PropTypes.string.isRequired,
+  closeMessage: PropTypes.func.isRequired,
+};
 
 const Wrapper = styled.figure`
   z-index: 20;

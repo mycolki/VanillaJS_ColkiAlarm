@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 export default function InputWrapper({ inputInfo: { type, name, text }, value, sendInputValue }) {
   return (
@@ -15,6 +16,20 @@ export default function InputWrapper({ inputInfo: { type, name, text }, value, s
     </Wrapper>
   );
 }
+
+InputWrapper.propTypes = {
+  type: PropTypes.string,
+  name: PropTypes.string,
+  text: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  sendInputValue: PropTypes.func.isRequired,
+};
+
+InputWrapper.defaultProps = {
+  type: '',
+  name: '',
+  text: '',
+};
 
 const Wrapper = styled.div`
   padding: 10px;

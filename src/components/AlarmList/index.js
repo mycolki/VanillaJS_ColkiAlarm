@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Alarm from '../Alarm';
 
@@ -22,6 +23,10 @@ export default function AlarmsViewer({ clock }) {
     </Container>
   );
 }
+
+AlarmsViewer.propTypes = {
+  clock: PropTypes.string.isRequired,
+};
 
 const Container = styled.div`
   width: 100%;

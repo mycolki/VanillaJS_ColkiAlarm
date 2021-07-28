@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import useSound from 'use-sound';
@@ -8,7 +9,7 @@ import alarmClick from '../../sound/alarmClick.mp3';
 
 import { removeAlarm, saveCurrentId, changeAlarmMode } from '../../features/alarmData/alarmDataSlice';
 import { TIME_FORMAT, ALARM_TIME } from '../../constants/timeText';
-import { MODE_ICON, KIND_ICON, ONLY_BASIC } from '../../constants/alarmItemText';
+import { MODE_ICON, KIND_ICON, MUTE__ICON, REMOVE_ICON, ONLY_BASIC } from '../../constants/alarmItemText';
 
 export default function Alarm({ clock, id, alarm }) {
   const { title, date, time, mode, kind } = alarm;
@@ -19,6 +20,7 @@ export default function Alarm({ clock, id, alarm }) {
     if (isTimeToAlarm) return;
 
     const now = moment().format(TIME_FORMAT);
+
     if (moment(now).isSame(id)) dispatch(saveCurrentId(id));
   }, [id, isTimeToAlarm, dispatch, clock]);
 
@@ -50,7 +52,7 @@ export default function Alarm({ clock, id, alarm }) {
             alt="mute"
             onClick={muteAlarmSound}
           >
-            🔕
+            {MUTE__ICON}
           </Button>
         )}
         <Button
@@ -58,12 +60,25 @@ export default function Alarm({ clock, id, alarm }) {
           alt="remove"
           onClick={cancelClickedAlarm}
         >
-          ✖️
+          {REMOVE_ICON}
         </Button>
       </Icons>
     </AlarmWrapper>
   );
 }
+
+Alarm.propTypes = {
+  clock: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  alarm: PropTypes.shape({
+    title: PropTypes.string,
+    data: PropTypes.string,
+    time: PropTypes.string,
+    mode: PropTypes.string,
+    kind: PropTypes.string,
+    message: PropTypes.string,
+  }).isRequired
+};
 
 const AlarmWrapper = styled.div`
   display: flex;
