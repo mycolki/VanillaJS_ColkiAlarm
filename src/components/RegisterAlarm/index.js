@@ -8,7 +8,7 @@ import click from '../../sound/click.mp3';
 import InputWrapper from '../InputWrapper';
 import RadioInputWrapper from '../RadioInputWrapper';
 
-import { saveAlarm, setError } from '../../features/alarmData/alarmDataSlice';
+import { saveAlarm, inputValidationError } from '../../features/alarmData/alarmDataSlice';
 import { BOX_SHADOW, BORDER, GLASS_WHITE_COLOR, MAIN_BLUE_COLOR } from '../../constants/cssStyle';
 import { ERROR } from '../../constants/errorText';
 import { ALARM, ALARM_MODE, ALARM_KIND, RADIO_TITLE, BUTTON } from '../../constants/inputText';
@@ -41,10 +41,10 @@ function RegisterAlarm() {
     } catch (err) {
       if (err.message === ERROR.SAME_KEY.CONSOLE_MSG) {
         console.error(ERROR.SAME_KEY.NAME, err.message);
-        dispatch(setError(ERROR.SAME_KEY));
+        dispatch(inputValidationError(ERROR.SAME_KEY));
       } else {
         console.error(ERROR.INPUT.NAME, err.message);
-        dispatch(setError(ERROR.INPUT));
+        dispatch(inputValidationError(ERROR.INPUT));
       }
 
       return;

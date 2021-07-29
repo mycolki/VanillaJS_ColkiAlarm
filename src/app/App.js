@@ -13,7 +13,7 @@ import Message from '../components/Message';
 import ErrorMessage from '../components/ErrorMessage';
 
 import { toggleModal } from '../features/activateModal/activateModalSlice';
-import { setClock, removeAlarm, initializeRingedId, setError } from '../features/alarmData/alarmDataSlice';
+import { setClock, removeAlarm, initializeRingedId, inputValidationError } from '../features/alarmData/alarmDataSlice';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function App() {
     const readyToOpenModal = () => dispatch(toggleModal());
     readyToOpenModal();
 
-    return () => dispatch(setError());
+    return () => dispatch(inputValidationError());
   }, [dispatch, hasError]);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function App() {
   const closeMessage = () => {
     dispatch(initializeRingedId());
     dispatch(removeAlarm(id));
-    dispatch(setError());
+    dispatch(inputValidationError());
     dispatch(toggleModal());
   };
 
