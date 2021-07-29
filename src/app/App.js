@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+import firebaseApp from '../firebase/firebase';
+
 import useSound from 'use-sound';
 import click from '../sound/click.mp3';
 
@@ -12,8 +14,10 @@ import ModalWrapper from '../components/ModalWrapper';
 import Message from '../components/Message';
 import ErrorMessage from '../components/ErrorMessage';
 
+import { COLKI_ALARM } from '../constants/database';
+import { ERROR } from '../constants/errorText';
 import { toggleModal } from '../features/activateModal/activateModalSlice';
-import { setClock, removeAlarm, initializeRingedId, inputValidationError } from '../features/alarmData/alarmDataSlice';
+import { getDataByFirebase, setClock, removeAlarm, initializeRingedId, inputValidationError } from '../features/alarmData/alarmDataSlice';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -21,6 +25,27 @@ export default function App() {
   const { isTimeToAlarm, id } = useSelector(state => state.alarmData);
   const { hasError, error } = useSelector(state => state.alarmData);
   const { shouldOpenModal } = useSelector(state => state.activateModal);
+
+  useEffect(() => {
+    const fetchData = async() => {
+      const database = await firebaseApp.database().ref(COLKI_ALARM);
+
+      database.on('value', async(snapshot) => {
+        try {
+          const data = snapshot.val();
+
+          if (!data) return;
+
+          await dispatch(getDataByFirebase(data));
+        } catch (error) {
+          console.error(ERROR.FETCH.CONSOLE_MSG, error.message);
+          dispatch(inputValidationError(ERROR.FETCH));
+        }
+      });
+    };
+
+    fetchData();
+  }, [dispatch]);
 
   useEffect(() => {
     if (!hasError) return;
@@ -36,11 +61,19 @@ export default function App() {
     return () => clearInterval(clockId);
   }, [dispatch]);
 
-  const closeMessage = () => {
+  const closeMessage = async() => {
     dispatch(initializeRingedId());
     dispatch(removeAlarm(id));
     dispatch(inputValidationError());
     dispatch(toggleModal());
+
+    try {
+      const database = await firebaseApp.database().ref(COLKI_ALARM);
+      await database.child(id).remove();
+    } catch (err) {
+      console.error(ERROR.FETCH.NAME, err.message);
+      dispatch(inputValidationError(ERROR.FETCH));
+    }
   };
 
   const [playClickSound] = useSound(click, { volume: 0.5 });

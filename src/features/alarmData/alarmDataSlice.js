@@ -20,6 +20,14 @@ const alarmDataSlice = createSlice({
   name,
   initialState,
   reducers: {
+    getDataByFirebase(state, action) {
+      if (!action.payload) return;
+      for (const [key, val] of Object.entries(action.payload)) {
+        if (state.alarmsById[key]) return;
+        state.allIds.push(key);
+        state.alarmsById[key] = val;
+      }
+    },
     setClock(state) {
       state.clock = moment().format(CLOCK_FORMAT);
     },
@@ -58,6 +66,7 @@ const alarmDataSlice = createSlice({
 });
 
 export const {
+  getDataByFirebase,
   setClock,
   saveAlarm,
   removeAlarm,

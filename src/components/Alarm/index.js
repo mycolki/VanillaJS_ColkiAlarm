@@ -2,12 +2,15 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import firebaseApp from '../../firebase/firebase';
 import moment from 'moment';
 
 import useSound from 'use-sound';
 import alarmClick from '../../sound/alarmClick.mp3';
 
-import { removeAlarm, saveCurrentId, changeAlarmMode } from '../../features/alarmData/alarmDataSlice';
+import { removeAlarm, saveCurrentId, changeAlarmMode, inputValidationError } from '../../features/alarmData/alarmDataSlice';
+import { ERROR } from '../../constants/errorText';
+import { COLKI_ALARM } from '../../constants/database';
 import { GLASS_WHITE_COLOR } from '../../constants/cssStyle';
 import { TIME_FORMAT, ALARM_TIME } from '../../constants/timeText';
 import { MODE_ICON, KIND_ICON, MUTE__ICON, REMOVE_ICON, ONLY_BASIC } from '../../constants/alarmItemText';
@@ -31,9 +34,17 @@ export default function Alarm({ clock, id, alarm }) {
     alarmClickSound();
   };
 
-  const cancelClickedAlarm = () => {
+  const cancelClickedAlarm = async() => {
     dispatch(removeAlarm(id));
     alarmClickSound();
+
+    try {
+      const database = await firebaseApp.database().ref(COLKI_ALARM);
+      await database.child(id).remove();
+    } catch (err) {
+      console.error(ERROR.REMOVE.CONSOLE_MSG, err.message);
+      dispatch(inputValidationError(ERROR.REMOVE));
+    }
   };
 
   return (

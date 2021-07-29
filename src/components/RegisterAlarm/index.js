@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import firebaseApp from '../../firebase/firebase';
 
 import useSound from 'use-sound';
 import click from '../../sound/click.mp3';
@@ -9,8 +10,9 @@ import InputWrapper from '../InputWrapper';
 import RadioInputWrapper from '../RadioInputWrapper';
 
 import { saveAlarm, inputValidationError } from '../../features/alarmData/alarmDataSlice';
-import { BOX_SHADOW, BORDER, GLASS_WHITE_COLOR, MAIN_BLUE_COLOR } from '../../constants/cssStyle';
 import { ERROR } from '../../constants/errorText';
+import { COLKI_ALARM } from '../../constants/database';
+import { BOX_SHADOW, BORDER, GLASS_WHITE_COLOR, MAIN_BLUE_COLOR } from '../../constants/cssStyle';
 import { ALARM, ALARM_MODE, ALARM_KIND, RADIO_TITLE, BUTTON } from '../../constants/inputText';
 
 function RegisterAlarm() {
@@ -25,19 +27,23 @@ function RegisterAlarm() {
     message: "",
   });
 
-  const handleChange = ev => {
-    const { name, value } = ev.target;
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
     setInputValue({
       ...inputValue, [name]: value,
     });
   };
 
-  const submitData = ev => {
+  const submitData = async(ev) => {
     ev.preventDefault();
     playClickSound();
 
     try {
+      const id = inputValue.date + ' ' + inputValue.time;
+
       dispatch(saveAlarm(inputValue));
+
+      await firebaseApp.database().ref(`${COLKI_ALARM}/${id}`).set(inputValue);
     } catch (err) {
       if (err.message === ERROR.SAME_KEY.CONSOLE_MSG) {
         console.error(ERROR.SAME_KEY.NAME, err.message);

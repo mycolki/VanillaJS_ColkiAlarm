@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import useSound from 'use-sound';
 import alarmClick from '../../sound/alarmClick.mp3';
 
-import { BOX_SHADOW, MAIN_BLUE_COLOR, MESSAGE_BG_COLOR } from '../../constants/cssStyle';
 import { ERROR_CLOSE, ERROR_ICON } from '../../constants/errorText';
+import { BOX_SHADOW, MAIN_BLUE_COLOR, MESSAGE_BG_COLOR } from '../../constants/cssStyle';
 
 function ErrorMessage({ error, closeModal }) {
   const [alarmClickSound] = useSound(alarmClick, { volume: 0.5 });
