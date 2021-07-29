@@ -58,7 +58,7 @@ const alarmDataSlice = createSlice({
       state.id = '';
       state.isTimeToAlarm = false;
     },
-    inputValidationError(state, action) {
+    processValidationError(state, action) {
       state.hasError = !state.hasError;
       state.error = action.payload ? action.payload : ERROR.INPUT;
     },
@@ -73,6 +73,6 @@ export const {
   changeAlarmMode,
   saveCurrentId,
   initializeRingedId,
-  inputValidationError,
+  processValidationError,
 } = alarmDataSlice.actions;
 export default alarmDataSlice.reducer;

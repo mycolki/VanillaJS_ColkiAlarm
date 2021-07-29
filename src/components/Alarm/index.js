@@ -8,7 +8,7 @@ import moment from 'moment';
 import useSound from 'use-sound';
 import alarmClick from '../../sound/alarmClick.mp3';
 
-import { removeAlarm, saveCurrentId, changeAlarmMode, inputValidationError } from '../../features/alarmData/alarmDataSlice';
+import { removeAlarm, saveCurrentId, changeAlarmMode, processValidationError } from '../../features/alarmData/alarmDataSlice';
 import { ERROR } from '../../constants/errorText';
 import { COLKI_ALARM } from '../../constants/database';
 import { GLASS_WHITE_COLOR } from '../../constants/cssStyle';
@@ -43,7 +43,7 @@ export default function Alarm({ clock, id, alarm }) {
       await database.child(id).remove();
     } catch (err) {
       console.error(ERROR.REMOVE.CONSOLE_MSG, err.message);
-      dispatch(inputValidationError(ERROR.REMOVE));
+      dispatch(processValidationError(ERROR.REMOVE));
     }
   };
 

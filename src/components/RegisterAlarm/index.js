@@ -9,7 +9,7 @@ import click from '../../sound/click.mp3';
 import InputWrapper from '../InputWrapper';
 import RadioInputWrapper from '../RadioInputWrapper';
 
-import { saveAlarm, inputValidationError } from '../../features/alarmData/alarmDataSlice';
+import { saveAlarm, processValidationError } from '../../features/alarmData/alarmDataSlice';
 import { ERROR } from '../../constants/errorText';
 import { COLKI_ALARM } from '../../constants/database';
 import { BOX_SHADOW, BORDER, GLASS_WHITE_COLOR, MAIN_BLUE_COLOR } from '../../constants/cssStyle';
@@ -47,10 +47,10 @@ function RegisterAlarm() {
     } catch (err) {
       if (err.message === ERROR.SAME_KEY.CONSOLE_MSG) {
         console.error(ERROR.SAME_KEY.NAME, err.message);
-        dispatch(inputValidationError(ERROR.SAME_KEY));
+        dispatch(processValidationError(ERROR.SAME_KEY));
       } else {
         console.error(ERROR.INPUT.NAME, err.message);
-        dispatch(inputValidationError(ERROR.INPUT));
+        dispatch(processValidationError(ERROR.INPUT));
       }
 
       return;

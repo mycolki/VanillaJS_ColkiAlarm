@@ -17,7 +17,7 @@ import ErrorMessage from '../components/ErrorMessage';
 import { COLKI_ALARM } from '../constants/database';
 import { ERROR } from '../constants/errorText';
 import { toggleModal } from '../features/activateModal/activateModalSlice';
-import { getDataByFirebase, setClock, removeAlarm, initializeRingedId, inputValidationError } from '../features/alarmData/alarmDataSlice';
+import { getDataByFirebase, setClock, removeAlarm, initializeRingedId, processValidationError } from '../features/alarmData/alarmDataSlice';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ export default function App() {
           await dispatch(getDataByFirebase(data));
         } catch (error) {
           console.error(ERROR.FETCH.CONSOLE_MSG, error.message);
-          dispatch(inputValidationError(ERROR.FETCH));
+          dispatch(processValidationError(ERROR.FETCH));
         }
       });
     };
@@ -53,7 +53,7 @@ export default function App() {
     const readyToOpenModal = () => dispatch(toggleModal());
     readyToOpenModal();
 
-    return () => dispatch(inputValidationError());
+    return () => dispatch(processValidationError());
   }, [dispatch, hasError]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function App() {
   const closeMessage = async() => {
     dispatch(initializeRingedId());
     dispatch(removeAlarm(id));
-    dispatch(inputValidationError());
+    dispatch(processValidationError());
     dispatch(toggleModal());
 
     try {
@@ -72,7 +72,7 @@ export default function App() {
       await database.child(id).remove();
     } catch (err) {
       console.error(ERROR.FETCH.NAME, err.message);
-      dispatch(inputValidationError(ERROR.FETCH));
+      dispatch(processValidationError(ERROR.FETCH));
     }
   };
 
