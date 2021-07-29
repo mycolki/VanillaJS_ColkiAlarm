@@ -39,6 +39,10 @@ const alarmDataSlice = createSlice({
       if (state.alarmsById[id]) throw Error(ERROR.SAME_KEY.CONSOLE_MSG);
 
       state.allIds.push(id);
+      state.allIds.sort((a, b) => {
+        return Number(a.replaceAll('-', '').slice(0, 8)) - Number(b.replaceAll('-', '').slice(0, 8));
+      });
+
       state.alarmsById[id] = action.payload;
     },
     removeAlarm(state, action) {

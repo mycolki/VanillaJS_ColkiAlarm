@@ -4,20 +4,21 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Alarm from '../Alarm';
+import { sortAlarmList } from '../../util/sortAlarmList';
 import { BOX_SHADOW } from '../../constants/cssStyle';
 
 export default function AlarmList({ clock }) {
-  const { alarmsById, allIds } = useSelector(state => state.alarmData);
+  const { allIds, alarmsById } = useSelector(state => state.alarmData);
 
   return (
     <Container>
       <ul>
-        {allIds && allIds.map((id, index) => (
+        {allIds && sortAlarmList(allIds, alarmsById).map((item, index) => (
           <Alarm
             clock={clock}
-            key={id}
+            key={allIds[index]}
             id={allIds[index]}
-            alarm={alarmsById[allIds[index]]}
+            alarm={item.id}
           />
         ))}
       </ul>
