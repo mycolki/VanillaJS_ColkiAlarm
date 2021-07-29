@@ -173,4 +173,4 @@ Colki Alarm 은 사용자가 원하는 날짜와 시간에 알람을 등록하�
 ## 👉 Deploy
 ---
 
-배포주소 : [Colki Alarm](https://www.notion.so/II-320cb032a275493f965de91c429cca75)
+배포주소 : [Colki Alarm](https://romantic-lamarr-9a5d19.netlify.app/)
