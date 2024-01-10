@@ -1,63 +1,43 @@
 # ⏱ Colki Alarm
-![alarmList](./src/image/list.png)
+<img src="./src/image/list.png" width="750" />
 
-Colki Alarm 은 사용자가 원하는 날짜와 시간에 알람을 등록하면, 입력된 날짜와 시간에 지정된 알람이 울리는 **알람 앱**입니다.
+Colki Alarm 은 사용자가 원하는 날짜와 시간에 알람을 등록하면, 입력된 날짜와 시간에 지정된 알람이 울립니다.
 
-심플한 인터페이스에 최소한의 필요한 기능만 들어 있어서 누구나 쉽게 사용할 수 있습니다.
+심플한 인터페이스에 최소한의 필요한 기능을 가진 알람 애플리케이션으로 누구나 쉽게 사용할 수 있습니다.
 무더위를 날릴 수 있는 시원 상큼한 UI로 사용자에게 시각적으로도 만족을 선사합니다.
 
 <br>
 
+## ⚒ Stack
 
-```
-🔽 Shortcut
++ React
++ React Redux (Redux-toolkit)
++ Styled-Component
++ Moment.js
++ UseSound
 
-<section>
-  <p>Features</p>
-  <p>Tech</p>
-  <p>Why</p>
-  <p>Challenge</p>
-</section>
-<footer>Deploy</footer>
-```
-
-<br>
 <br>
 
 ## 🔍 Features
----
 
 ### ☻ 알람등록
 
-![alarmList](./src/image/list.png)
+<img src="./src/image/list.png" width="750" />
 
-
-
----
 알람을 등록하는 부분과 알람리스트가 분리 되어 있어서 일정을 등록할 때마다 오른쪽 UI에 리스트업이 되기 때문에 입력과 동시에 리스트를 체크할 수 있도록 사용자 편의를 고려하였습니다.
+
+사용자는 3가지의 알람 모드 중에서 선택할 수 있습니다.
+
+`일반` 소리 울림 | `진동` 진동 울림 | `야간` 소리 없음
 
 ✖️ 아이콘을 누르면 삭제할 수 있고, 🔕 아이콘을 누르면 소리를 진동으로 바꿀 수 있습니다.
 🔕 아이콘은 진동, 무음을 제외한 일반모드일 때만 보입니다.
 
 <br>
 
-사용자는 3가지의 알람 모드 중에서 선택할 수 있습니다.
-
->`일반` 소리 울림
-
->`진동` 진동 울림
-
->`야간` 소리 없음
-
-<br>
-
 또한 **중요한 알람일 때 긴급**으로 체크하면 야간 모드일지라도 진동이 아닌 소리 알람이 울립니다
 
-<br>
-
->`항상` 선택한 모드에 따라서
-
->`긴급` 야간모드에도 소리울림
+`항상` 선택한 모드에 따라서 | `긴급` 야간모드에도 소리울림
 
 <br>
 
@@ -65,60 +45,33 @@ Colki Alarm 은 사용자가 원하는 날짜와 시간에 알람을 등록하�
 사용자가 등록한 시간과 일치하는 순간 입력되어 있던 모드와 일치하는 알람이 울리면서
 같이 메모했던 알림 메시지가 나타납니다.
 
-**`일반 소리 알림`**
-![basic-mode](./src/image/basic.png)
-<br>
 
-**`진동 알림`**
-![vibration-mode](./src/image/vibration.png)
-<br>
+|일반 소리 알림|진동 알림|
+|------|---|
+|<img src="./src/image/basic.png" width="750" />|<img src="./src/image/vibration.png" width="750" />|
+
+|긴급설정시|무음|
+|------|---|
+|<img src="./src/image/emergency.png" width="750" />|<img src="./src/image/emergency.png" width="750" />|
 
 **`긴급설정시`**
-![emergency-mode](./src/image/emergency.png)
-<br>
 
-**`무음`**
-![silent](./src/image/emergency.png)
-
----
-
-
-<br>
 
 ### ☻ 중복 등록 방지
-![alarmList](./src/image/same.png)
+<img src="./src/image/same.png" width="750" />
 
 동일한 날짜와 시간에는 알람을 추가 등록할 수 없습니다. 만약 사용자가 동일하게 입력하는 경우 추가가 안되는 이유와 해결방법이 메시지로 나타납니다.
 
 <br>
 
 ### ☻ 정보 미입력 방지
-![alarmList](./src/image/blank1.png)
+<img src="./src/image/blank1.png" width="750" />
 
 모든 정보는 필수로 사용자가 선택하지 않을 시 모달창에 등록이 안되는 이유와 해결방법이 메시지로 나타납니다.
 
 <br>
 
-
-
-## ⚒ Tech
----
-
-+ React
-
-+ React Redux (Redux-toolkit)
-
-+ Styled-Component
-
-+ Moment.js
-
-+ UseSound
-
-
-<br>
-
 ## 💡 Why
----
 
 <br>
 
@@ -154,7 +107,6 @@ Colki Alarm 은 사용자가 원하는 날짜와 시간에 알람을 등록하�
 <br>
 
 ## 💣 Challenge
----
 
 이번 알람을 만들면서는 가장 중요하게 여긴 부분이 처음부터 코드 한 줄 한 줄 확실하게, 깔끔하게 정리하면서 작성하자 였습니다.
 이전에는 일단 구현이 먼저야 하면서 결과에 집중했었는데, 나중에서야 한번 엇나간 스타일을 바로 잡고 삐걱대는 구조를 재배치하는 일이 거의 불가능하다는 걸 알았습니다.
